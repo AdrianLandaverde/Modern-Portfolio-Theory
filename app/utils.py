@@ -100,7 +100,8 @@ def make_simulation(df):
     max_sr_ret = port_return[ind]
     max_sr_vol = port_volatility[ind]
     
-    fig= px.scatter(df_results, x='Volatility', y='Return', color='Sharpe Ratio', title='Portfolio Optimization')
+    fig= px.scatter(df_results, x='Volatility', y='Return', color='Sharpe Ratio', title='Portfolio Optimization',
+                    color_continuous_scale=px.colors.diverging.Temps_r)
     #add the max SR point
     fig.add_trace(px.scatter(x=[max_sr_vol], y=[max_sr_ret], color=[max_sr], size=[100]).data[0])
     

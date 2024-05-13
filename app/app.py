@@ -44,7 +44,7 @@ card_graph = dbc.Card([
                 dbc.CardBody([
                     
                     dcc.Loading( id="loading-output", children=[html.Div(dcc.Graph(id='graph_close', style={'height': 'calc(30vh - 20px)', 'width': '100%'}))], 
-                                type="graph", style={'height': 'calc(30vh - 20px)', 'width': '100%', 'z-index': '1000'}),
+                                type="graph", style={'height': 'calc(30vh - 20px)', 'width': '100%', 'z-index': '1000', 'display': 'flex', 'justify-content': 'center', 'align-items': 'center'}),
                     
                 ], style= {'margin': '0px', 'padding': '0px', 'height': 'calc(30vh - 20px)', 'width': '100%'})
             ], className="mb-10", style={'height': 'calc(30vh - 20px)', 'margin': '10px'})
@@ -52,15 +52,26 @@ card_graph = dbc.Card([
 card_results = dbc.Card([
                 dbc.CardBody([
                     
-                    dcc.Loading( id="loading-output2", children=[html.Div(dcc.Graph(id='graph_simulation', style={'height': 'calc(70vh - 20px)', 'width': '100%'}))],
-                                type="graph", style={'height': 'calc(70vh - 20px)', 'width': '100%', 'z-index': '1000'})
+                    dcc.Loading(
+                        id="loading-output2", 
+                        children=[html.Div(dcc.Graph(id='graph_simulation', style={'height': 'calc(70vh - 20px)', 'width': '100%'}))],
+                        type="graph", 
+                        style={
+                            'height': 'calc(70vh - 20px)', 
+                            'width': '100%', 
+                            'z-index': '1000', 
+                            'display': 'flex', 
+                            'justify-content': 'center', 
+                            'align-items': 'center'
+                        }
+                    )
                 ], style= {'margin': '0px', 'padding': '0px', 'height': 'calc(70vh - 20px)', 'width': '100%'})
             ], className="mb-9", style={'height': 'calc(70vh - 20px)', 'margin': '10px', 'margin-left':'20px'})
 
 card_percentages = dbc.Card([
                         dbc.CardBody([
                             dcc.Loading( id="loading-output3", children=[html.Div(dcc.Graph(id='graph_percentages', style={'height': 'calc(45vh - 20px)', 'width': '100%'}))],
-                                type="graph", style={'height': 'calc(45vh - 20px)', 'width': '100%', 'z-index': '1000'})
+                                type="graph", style={'height': 'calc(45vh - 20px)', 'width': '100%', 'z-index': '1000', 'display': 'flex', 'justify-content': 'center', 'align-items': 'center'})
                         ], style= {'margin': '0px', 'padding': '0px', 'height': 'calc(45vh - 20px)', 'width': '100%'})
                     ], style= {'height': 'calc(45vh - 20px)', 'margin': '10px', 'margin-right':'20px'})
 
@@ -68,7 +79,7 @@ card_best_portfolio = dbc.Card([
                         dbc.CardBody([
                             
                             dcc.Loading( id="loading-output4", children=[html.Div(id='best-portfolio', style={'height': 'calc(25vh - 20px)', 'width': '100%'})],
-                                type="default", style={'height': 'calc(25vh - 20px)', 'width': '100%', 'z-index': '1000'})
+                                type="default", style={'height': 'calc(25vh - 20px)', 'width': '100%', 'z-index': '1000', 'display': 'flex', 'justify-content': 'center', 'align-items': 'center'})
                         ])
                     ], style= {'height': 'calc(25vh - 20px)', 'margin': '10px', 'margin-right':'20px'})
 
