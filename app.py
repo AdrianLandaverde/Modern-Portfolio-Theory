@@ -43,7 +43,7 @@ card_input= dbc.Card([
 card_graph = dbc.Card([
                 dbc.CardBody([
                     
-                    dcc.Loading( id="loading-output", children=[html.Div(dcc.Graph(id='graph_close', style={'height': 'calc(30vh - 20px)', 'width': '100%'}))], 
+                    dcc.Loading( id="loading-output", children=[html.Div(id='graph_close')], 
                                 type="graph", style={'height': 'calc(30vh - 20px)', 'width': '100%', 'z-index': '1000', 'display': 'flex', 'justify-content': 'center', 'align-items': 'center'}),
                     
                 ], style= {'margin': '0px', 'padding': '0px', 'height': 'calc(30vh - 20px)', 'width': '100%'})
@@ -54,7 +54,7 @@ card_results = dbc.Card([
                     
                     dcc.Loading(
                         id="loading-output2", 
-                        children=[html.Div(dcc.Graph(id='graph_simulation', style={'height': 'calc(70vh - 20px)', 'width': '100%'}))],
+                        children=[html.Div(id= 'graph_simulation')],
                         type="graph", 
                         style={
                             'height': 'calc(70vh - 20px)', 
@@ -70,7 +70,7 @@ card_results = dbc.Card([
 
 card_percentages = dbc.Card([
                         dbc.CardBody([
-                            dcc.Loading( id="loading-output3", children=[html.Div(dcc.Graph(id='graph_percentages', style={'height': 'calc(45vh - 20px)', 'width': '100%'}))],
+                            dcc.Loading( id="loading-output3", children=[html.Div(id='graph_percentages')],
                                 type="graph", style={'height': 'calc(45vh - 20px)', 'width': '100%', 'z-index': '1000', 'display': 'flex', 'justify-content': 'center', 'align-items': 'center'})
                         ], style= {'margin': '0px', 'padding': '0px', 'height': 'calc(45vh - 20px)', 'width': '100%'})
                     ], style= {'height': 'calc(45vh - 20px)', 'margin': '10px', 'margin-right':'20px'})
@@ -109,7 +109,7 @@ app.layout = dbc.Container([
 ], fluid=True)
 
 @app.callback(
-    Output('graph_close', 'figure'),
+    Output('graph_close', 'children'),
     [Input('optimize-button', 'n_clicks')], 
     [State('string-list', 'value'), 
     State('date-range', 'start_date'), State('date-range', 'end_date')]
@@ -141,11 +141,20 @@ def update_output(n_clicks, tickers, start_date, end_date):
         fig= format_graph(fig)
         fig.update_xaxes(title_text="", title_standoff=0)
         
-        return fig
-    return ''
-
+        return dcc.Graph(figure=fig, style={'height': 'calc(30vh - 20px)', 'width': '100%'})
+    return html.H3('Graph of Adjusted Close Prices', 
+                    style={
+                        'color': '#FFFFFF', 
+                        'text-align': 'center', 
+                        'height': 'calc(30vh - 20px)', 
+                        'width': '100%',
+                        'display': 'flex',
+                        'justify-content': 'center',
+                        'align-items': 'center'
+                    })
+    
 @app.callback(
-    Output('graph_simulation', 'figure'),
+    Output('graph_simulation', 'children'),
     [Input('optimize-button', 'n_clicks')], 
     [State('string-list', 'value'), 
     State('date-range', 'start_date'), State('date-range', 'end_date')]
@@ -165,12 +174,21 @@ def update_output2(n_clicks, tickers, start_date, end_date):
         
         fig= format_graph(fig)
         
-        return fig
-    return ''
+        return dcc.Graph(figure= fig, style={'height': 'calc(70vh - 20px)', 'width': '100%'})
+    return html.H3('Graph of Simulation of Portfolios', 
+                    style={
+                        'color': '#FFFFFF', 
+                        'text-align': 'center', 
+                        'height': 'calc(70vh - 20px)', 
+                        'width': '100%',
+                        'display': 'flex',
+                        'justify-content': 'center',
+                        'align-items': 'center'
+                    })
     
     
 @app.callback(
-    Output('graph_percentages', 'figure'),
+    Output('graph_percentages', 'children'),
     [Input('optimize-button', 'n_clicks')], 
     [State('string-list', 'value'), 
     State('date-range', 'start_date'), State('date-range', 'end_date')]
@@ -193,8 +211,17 @@ def update_output3(n_clicks, tickers, start_date, end_date):
         fig.update_layout(showlegend=False)
         
     
-        return fig
-    return ''
+        return dcc.Graph(figure= fig, style={'height': 'calc(45vh - 20px)', 'width': '100%'})
+    return html.H3('Graph of Portfolio Percentages', 
+                    style={
+                        'color': '#FFFFFF', 
+                        'text-align': 'center', 
+                        'height': 'calc(45vh - 20px)', 
+                        'width': '100%',
+                        'display': 'flex',
+                        'justify-content': 'center',
+                        'align-items': 'center'
+                    })
 
 @app.callback(
     Output('best-portfolio', 'children'),
@@ -222,7 +249,16 @@ def update_output4(n_clicks, tickers, start_date, end_date):
         
     
         return format_results
-    return ''
+    return html.H3('Results of the Best Portfolio', 
+                    style={
+                        'color': '#FFFFFF', 
+                        'text-align': 'center', 
+                        'height': 'calc(25vh - 20px)', 
+                        'width': '100%',
+                        'display': 'flex',
+                        'justify-content': 'center',
+                        'align-items': 'center'
+                    })
     
 
 if __name__ == '__main__':
